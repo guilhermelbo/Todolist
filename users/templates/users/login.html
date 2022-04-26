@@ -1,0 +1,23 @@
+{% extends 'global/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <h1 class="my-4 text-center">Login</h1>
+    <div class="d-grid gap-2 col-6 offset-3 mt-4">
+        <form method="POST" action={% url 'valida_login' %}>{% csrf_token %}
+            <label class="mb-1">Usuário</label>
+            <input name="usuario" class="form-control mb-2" type="text" placeholder="Nome">
+            <label class="mb-1">Senha</label>
+            <input name="senha" class="form-control mb-3" type="password" placeholder="Senha">
+            <button class="btn btn-primary col-12 mb-4 py-2">Enviar</button>
+        </form>
+    </div>
+    
+    {% if status == '1' %}
+        <div class="alert alert-danger mb-4 offset-1 col-10 text-center" role="alert">
+            Usuário ou senha incorretos
+        </div>
+    {% endif %}
+{% endblock %}
+
