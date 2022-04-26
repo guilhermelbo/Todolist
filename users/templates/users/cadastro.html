@@ -1,0 +1,40 @@
+{% extends 'global/base.html' %}
+
+{% block title %}Cadastro{% endblock %}
+
+{% block content %}
+    <h1 class="my-4 text-center">Cadastro</h1>
+    <div class="d-grid gap-2 col-6 offset-3 mt-4">
+        <form method="POST" action={% url 'valida_cadastro' %}>{% csrf_token %}
+            <label class="mb-1">Usuário</label>
+            <input name="usuario" class="form-control mb-2" type="text" placeholder="Nome">
+            <label class="mb-1">Email</label>
+            <input name="email" class="form-control mb-2" type="text" placeholder="Email">
+            <label class="mb-1">Senha</label>
+            <input name="senha" class="form-control mb-3" type="password" placeholder="Senha">
+            <button class="btn btn-primary col-12 mb-4 py-2">Enviar</button>
+        </form>
+    </div>
+    {% if status == '1' %}
+        <div class="alert alert-danger mb-4 offset-1 col-10 text-center" role="alert">
+            Usuário ou login não podem ser vazios
+        </div>
+    {% elif status == '2' %}
+        <div class="alert alert-danger mb-4 offset-1 col-10 text-center" role="alert">
+            A senha deve ter pelo menos 8 dígitos
+        </div>
+    {% elif status == '3' %}
+        <div class="alert alert-danger mb-4 offset-1 col-10 text-center" role="alert">
+            Usuário já cadastrado
+        </div>
+    {% elif status == '4' %}
+        <div class="alert alert-danger mb-4 offset-1 col-10 text-center" role="alert">
+            E-mail já cadastrado
+        </div>
+    {% elif status == '5' %}
+        <div class="alert alert-danger mb-4 offset-1 col-10 text-center" role="alert">
+            Erro interno
+        </div>
+    {% endif %}
+{% endblock %}
+
