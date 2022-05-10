@@ -1,0 +1,38 @@
+#textarea_new_task, #approve_btn_new_task, #cancel_btn_new_task{
+    display: none
+}
+
+.pl-display-col{
+    padding-left: 1%;
+    display: flex
+}
+
+.pr-col{
+    padding-right: 1%
+}
+
+.btn-style{
+    padding: 0px;
+    width: 46%;
+    height: 100%;
+}
+
+.approve-style{
+    width: 30px;
+    height: 20px
+}
+
+.cancel-style{
+    width: 30px;
+    height: 17px
+}
+
+.textarea-style{
+    height: 100%
+}
+
+.task_completed{
+    color: white;
+    background: #198754;
+    text-decoration: line-through
+}
