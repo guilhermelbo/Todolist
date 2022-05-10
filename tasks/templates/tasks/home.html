@@ -1,4 +1,14 @@
 {% extends 'global/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/tasks_functions.js' %}"></script>
+{% endblock %}
 
 {% block title %}Home{% endblock %}
 
@@ -7,8 +17,41 @@
         <h1 class='my-4'>Todo list</h1>
         <p>Organize suas tarefas</p>
     </div>
-    <div class="d-grid gap-2 col-6 offset-3 mt-4">
-        <a class="btn btn-primary" href={% url 'cadastro' %}>Cadastro</a>
-        <a class="btn btn-primary mb-4" href={% url 'login' %}>Login</a>
-    </div> 
+    {% if not logged %}
+        <div class="d-grid gap-2 col-6 offset-3 mt-4">
+            <a class="btn btn-primary" href={% url 'cadastro' %}>Cadastro</a>
+            <a class="btn btn-primary mb-4" href={% url 'login' %}>Login</a>
+        </div> 
+    {% else %}
+        <div class="row mb-3">
+            <button class="btn btn-success offset-4 col-4" onclick="show_field_task()">Adicionar Tarefa</button>
+            <a class="btn btn-outline-dark offset-1 col-2" href={% url 'logout' %}>Sair</a>
+        </div>
+        <div id="row_new_task" class="row mb-1">
+            <div class="col-10 gx-0 pl-display-col">
+                <textarea id="textarea_new_task" placeholder="Descrição da tarefa" class="form-control textarea-style" onblur="save_task(this)"></textarea>
+            </div>
+            <div class="col-2 gx-0 pr-col">
+                <button id="approve_btn_new_task" class="btn btn-style" onclick="complete_task(this)"><img src="static/img/approve.svg" class="approve-style"></button>
+                <button id="cancel_btn_new_task" class="btn btn-style" onclick="delete_task(this)"><img src="static/img/cancel.svg" class="cancel-style"></button>
+            </div>
+        </div>
+        <div id="tasks">
+            {% for task in tasks %}
+                <div class="row mb-1">
+                    <div class="col-10 gx-0 pl-display-col">
+                        {% if task.completed %}
+                            <textarea placeholder="Descrição da tarefa" class="form-control textarea-style task_completed" onblur="update_task(this)">{{task}}</textarea>
+                        {% else %}
+                            <textarea placeholder="Descrição da tarefa" class="form-control textarea-style" onblur="update_task(this)">{{task}}</textarea>
+                        {% endif %}
+                    </div>
+                    <div class="col-2 gx-0 pr-col">
+                        <button class="btn btn-style" onclick="complete_task(this)"><img src="static/img/approve.svg" class="approve-style"></button>
+                        <button class="btn btn-style" onclick="delete_task(this)"><img src="static/img/cancel.svg" class="cancel-style"></button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 {% endblock %}
