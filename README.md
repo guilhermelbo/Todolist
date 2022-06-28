@@ -42,10 +42,9 @@ Lista de tarefas feita com o objetivo de praticar e melhorar no desenvolvimento 
  
  cd Todolist
  
- python manage.py runserver
- 
- #Caso o comando acima dê algum erro, tente primeiro:
  python manage.py migrate
+ 
+ python manage.py runserver
  ```
  
  ## Autor
