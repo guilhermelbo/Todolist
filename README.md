@@ -4,7 +4,7 @@
 
 ## Sobre
 
-Lista de tarefas feita com o objetivo de praticar e melhorar no desenvolvimento com django e usando requisições assíncronas no frontend
+Lista de tarefas criada para melhorar o desenvolvimento com django usando requisições assíncronas no frontend.
 
 ## Tecnologias
 
